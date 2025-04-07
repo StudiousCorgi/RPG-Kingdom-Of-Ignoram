@@ -1,0 +1,21 @@
+body {
+    background-color: #f9f8f6;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
+  h1, h2, h3, h4 {
+    color: #4a148c;
+  }
+  
+  .card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    color: #00695c;
+  }
+  
