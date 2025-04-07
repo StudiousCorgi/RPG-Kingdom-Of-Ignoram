@@ -1,7 +1,8 @@
 body {
     background-color: #fff8f0;
     font-family: 'Garamond', 'Georgia', serif;
-    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    background-image: url('./Visual\ Assets/vintage_background.png');
+    background-size: cover;
     background-repeat: repeat;
     color: #4b2e2e;
     line-height: 1.6;
@@ -18,15 +19,16 @@ body {
     border: 10px solid #e4cfa1;
     border-radius: 20px;
     padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(245, 231, 206, 0.95);
+    color: #7a3b00;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     margin-top: 2rem;
   }
   
   .card {
     border-radius: 15px;
-    border: 2px solid #d9b382;
-    background-color: #fffdf7;
+    border: 2px solid hsl(45, 100%, 80%);
+    background-color: hsl(45, 100%, 98%);
     margin-bottom: 1rem;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
   }
