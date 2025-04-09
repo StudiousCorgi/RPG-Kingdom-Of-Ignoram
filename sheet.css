@@ -1,0 +1,96 @@
+/*...Style sheet for sheet html...*/
+
+.navbar {
+    background-color: #e4cfa1 !important;
+    border-bottom: 3px solid #7a3b00;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Garamond', 'Georgia', serif;
+    margin-bottom: 2rem !important;
+  }
+  
+  .navbar-brand {
+    color: #7a3b00 !important;
+    font-family: 'Cloister Black', 'Garamond', 'Georgia', serif;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px #e8d8c3;
+    font-weight: bold;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link {
+    color: #4b2e2e !important;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin: 0 3px;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link:hover {
+    background-color: #d9b382;
+    color: #4b2e2e !important;
+  }
+  
+  .navbar-dark .navbar-nav .nav-link.active {
+    background-color: #7a3b00;
+    color: #fff !important;
+  }
+  
+  .navbar-toggler {
+    border-color: #7a3b00 !important;
+    background-color: #7a3b00;
+  }
+  
+    
+    @media print {
+      body {
+        background: none !important;
+        color: #000 !important;
+      }
+
+      .container {
+        box-shadow: none;
+        border: 1px solid #000;
+        background-color: #fff !important;
+      }
+
+      .navbar,
+      footer {
+        display: none !important;
+      }
+
+      input,
+      textarea {
+        border: 1px solid #000;
+        background: none !important;
+      }
+    }
+
+    .form-line {
+      border-bottom: 1px solid #7a3b00;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media screen {
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            .navbar-dark .navbar-nav .nav-link {
+                padding: 0.5rem 0.5rem;
+                margin: 0 1px;
+            }
+            .container {
+                padding: 1rem;
+            }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.25rem; }
+            h4 { font-size: 1rem; }
+        }
+        
+    }

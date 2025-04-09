@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bootstrap.css">
+    <script src="/script.js"></script>
+    <script src="./bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond&display=swap">
+    <title>Kingdom of Ignoram - Character Sheet</title>
+
+</head>
+
+<body class="bg-light text-dark" img src="./Visual Assets/VintagePaper.png" alt="Background Image">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Kingdom of Ignoram</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./core.html">System Core</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./sheet.html">(print) Character Sheet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./character.html">(Coming Soon) Character Sheet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./prompts.html">Adventures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./bestiary.html">Bestiary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./spells.html">Spells</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Character Sheet</h1>
+    <form id="characterForm">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="charName" class="form-label">Character Name</label>
+          <input type="text" id="charName" class="form-control" required />
+        </div>
+        <div class="col-md-6">
+          <label for="role" class="form-label">Role (Class)</label>
+          <select id="role" class="form-select">
+            <option>Word Wielder</option>
+            <option>Math Mage</option>
+            <option>Tinker Thinker</option>
+            <option>Artisan of Art</option>
+            <option>Memory Monk</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="skill" class="form-label">Special Skill</label>
+          <select id="skill" class="form-select">
+            <option>Fast Reader</option>
+            <option>Number Ninja</option>
+            <option>Puzzle Solver</option>
+            <option>Kind Heart</option>
+            <option>Quick Feet</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="magicItem" class="form-label">Magic Item</label>
+          <select id="magicItem" class="form-select">
+            <option>Fairy Tale Wand</option>
+            <option>Sword of Statistics</option>
+            <option>Creative Toolkit</option>
+            <option>Memory Beads</option>
+            <option>Inspiration Flute</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="kp" class="form-label">Knowledge Points (KP)</label>
+        <input type="number" id="kp" class="form-control" min="0" value="0" />
+      </div>
+
+      <div class="mb-3">
+        <label for="gear" class="form-label">Gear & Items</label>
+        <textarea id="gear" class="form-control" rows="2"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="knownSpells" class="form-label">Known Spells</label>
+        <textarea id="knownSpells" class="form-control" rows="2"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="notes" class="form-label">Adventure Notes</label>
+        <textarea id="notes" class="form-control" rows="4"></textarea>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="button" onclick="saveCharacter()">💾 Save Character</button>
+        <button type="button" class="button" onclick="loadCharacter()">📂 Load Character</button>
+        <button type="reset" class="button">🧼 Clear</button>
+      </div>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <div class="text-center py-4 bg-dark text-light">
+      <p>Made with 🧙‍♂️ magic and 📚 learning</p>
+      <p>&copy; 2025 Kingdom of Ignoram. All rights reserved.</p>
+      <p>Created by StudiousCorgi (Asia Brown-Haller)</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
