@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller - Kingdom of Ignoram</title>
+    <link rel="stylesheet" href="./diceroller.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bootstrap.css">
+    <script src="./diceroller.js"></script>
+    <script src="/script.js"></script>
+    <script src="./bootstrap.bundle.js"></script>
+ 
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Kingdom of Ignoram</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./core.html">System Core</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./sheet.html">(print) Character Sheet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./character.html">(Coming Soon) Character Sheet</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./diceroller.html">Dice Roller</a>
+                    </li>   
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="./prompts.html">Adventures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./bestiary.html">Bestiary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./spells.html">Spells</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  <div class="container my-5">
+    <h1 class="text-center roller-title">🎲 Dice Roller - Kingdom of Ignoram</h1>
+
+    <form id="diceForm" class="row g-3">
+
+      <div class="col-12">
+        <label for="rollReason">Reason for this Roll</label>
+        <input type="text" id="rollReason" class="form-control" placeholder="e.g., Attack with 'Divide The Scribbles'">
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label for="skillName">Skill Name</label>
+        <input type="text" id="skillName" class="form-control" placeholder="e.g., Super Reader">
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label for="skillBonus">Skill Level / Bonus</label>
+        <input type="number" id="skillBonus" class="form-control" value="0">
+      </div>
+      
+      <div class="col-6 col-md-2">
+        <label for="d4">D4</label>
+        <input type="number" min="0" value="0" class="form-control" id="d4">
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="d6">D6</label>
+        <input type="number" min="0" value="0" class="form-control" id="d6">
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="d10">D10</label>
+        <input type="number" min="0" value="0" class="form-control" id="d10">
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="d12">D12</label>
+        <input type="number" min="0" value="0" class="form-control" id="d12">
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="d20">D20</label>
+        <input type="number" min="0" value="0" class="form-control" id="d20">
+      </div>
+      <div class="col-12 col-md-2 d-grid align-items-end">
+        <button type="submit" class="btn btn-primary mt-4">Roll Dice</button>
+      </div>
+    </form>
+
+    <div id="results" class="mt-5"></div>
+  <div id="log" class="mt-5">
+    <h3 class="mt-4">📜 Roll History</h3>
+    <ul id="logList" class="list-group"></ul>
+  </div>
+  </div>
+  <audio id="dice-sound" src="https://freesound.org/data/previews/341/341695_3248244-lq.mp3"></audio>
+
+  <footer class="footer">
+        <div class="text-center py-4 bg-dark text-light">
+            <p>Made with 🧙‍♂️ magic and 📚 learning</p>
+            <p>&copy; 2025 Kingdom of Ignoram. All rights reserved.</p>
+            <p>Created by StudiousCorgi (Asia Brown-Haller)</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
