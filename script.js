@@ -39,3 +39,27 @@ function getCharacterData() {
       alert("No saved character found.");
     }
   }
+
+  <!-- Inline Script for Spell Builder -->
+ 
+    document.getElementById('create-spell-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get input values from the form
+      const name = document.getElementById('spellName').value;
+      const type = document.getElementById('spellType').value;
+      const effect = document.getElementById('spellEffect').value;
+      const target = document.getElementById('spellTarget').value;
+      const difficulty = document.getElementById('spellDifficulty').value;
+
+      // Populate the spell preview section with the entered values
+      document.getElementById('previewName').textContent = name;
+      document.getElementById('previewType').textContent = type;
+      document.getElementById('previewEffect').textContent = effect;
+      document.getElementById('previewTarget').textContent = target;
+      document.getElementById('previewDifficulty').textContent = difficulty;
+
+      // Show the preview container
+      document.getElementById('spellPreview').classList.remove('d-none');
+    });
+  
