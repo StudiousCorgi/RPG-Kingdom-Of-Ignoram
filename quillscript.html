@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bootstrap.css">
+   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond&display=swap">
+    <title>Kingdom of Ignoram - Quillscript</title>
+
+</head>
+
+<body class="bg-light text-dark" img src="./Visual Assets/VintagePaper.png" alt="Background Image">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Kingdom of Ignoram</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./core.html">System Core</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./character.html">Character Sheet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./diceroller.html">Dice Roller</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./prompts.html">Adventures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./bestiary.html">Bestiary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./spells.html">Spells</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5">
+        <h1 class="text-center mb-4">🧙‍♀️ Quillscript Codex Decoder</h1>
+    
+        <div class="card">
+          <h3>📜 Quillscript Codex</h3>
+          <table class="table table-bordered text-center">
+            <thead class="table-light">
+              <tr><th>Letter</th><th>Symbol</th><th>Letter</th><th>Symbol</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A</td><td class="symbol">✧</td><td>N</td><td class="symbol">❈</td></tr>
+              <tr><td>B</td><td class="symbol">⧫</td><td>O</td><td class="symbol">✪</td></tr>
+              <tr><td>C</td><td class="symbol">☽</td><td>P</td><td class="symbol">⚔</td></tr>
+              <tr><td>D</td><td class="symbol">⚑</td><td>Q</td><td class="symbol">♁</td></tr>
+              <tr><td>E</td><td class="symbol">❂</td><td>R</td><td class="symbol">☘</td></tr>
+              <tr><td>F</td><td class="symbol">✦</td><td>S</td><td class="symbol">✿</td></tr>
+              <tr><td>G</td><td class="symbol">⌖</td><td>T</td><td class="symbol">⏃</td></tr>
+              <tr><td>H</td><td class="symbol">♒</td><td>U</td><td class="symbol">⚵</td></tr>
+              <tr><td>I</td><td class="symbol">◉</td><td>V</td><td class="symbol">⚶</td></tr>
+              <tr><td>J</td><td class="symbol">⚚</td><td>W</td><td class="symbol">⚘</td></tr>
+              <tr><td>K</td><td class="symbol">⚙</td><td>X</td><td class="symbol">⚒</td></tr>
+              <tr><td>L</td><td class="symbol">♖</td><td>Y</td><td class="symbol">☊</td></tr>
+              <tr><td>M</td><td class="symbol">☀</td><td>Z</td><td class="symbol">☍</td></tr>
+            </tbody>
+          </table>
+        </div>
+    
+        <div class="card">
+          <h4>🔐 Quillscript Encoder</h4>
+          <textarea id="plainText" class="form-control" rows="3" placeholder="Type your message here..."></textarea>
+          <button class="btn btn-primary mt-2" onclick="encodeMessage()">Encode</button>
+          <p class="mt-3"><strong>Encoded:</strong></p>
+          <div id="encodedText" class="border p-2 bg-light"></div>
+        </div>
+    
+        <div class="card">
+          <h4>🗝️ Quillscript Decoder</h4>
+          <textarea id="quillText" class="form-control" rows="3" placeholder="Paste coded message here..."></textarea>
+          <button class="btn btn-success mt-2" onclick="decodeMessage()">Decode</button>
+          <p class="mt-3"><strong>Decoded:</strong></p>
+          <div id="decodedText" class="border p-2 bg-light"></div>
+        </div>
+      </div>
+
+    <footer class="footer">
+        <div class="text-center py-4 bg-dark text-light">
+            <p>Made with 🧙‍♂️ magic and 📚 learning</p>
+            <p>&copy; 2025 Kingdom of Ignoram. All rights reserved.</p>
+            <p>Created by StudiousCorgi (Asia Brown-Haller)</p>
+        </div>
+    </footer>
+
+</body>
+
+<script src="./quillscript.js"></script>
+<script src="./bootstrap.bundle.js"></script>
+
+</html>
