@@ -109,6 +109,29 @@
   </div>
   <footer class="footer">
     <div class="text-center py-4 bg-dark text-light">
+        <div id="greeting" style="font-size: 1.5em; margin-top: 20px;"></div>
+    <script>
+        function getQuirkyGreeting() {
+          const hour = new Date().getHours();
+          let message = "";
+    
+          if (hour >= 5 && hour < 12) {
+            message = "Top of the morning, Knowledge Seeker! Mind the bears, they love porridge for breakfast!";
+          } else if (hour >= 12 && hour < 17) {
+            message = "Good afternoon, Knowledge Seeker! Watch out for sleepy dragons taking a midday nap.";
+          } else if (hour >= 17 && hour < 21) {
+            message = "Evening greetings, Adventurer! Trolls might be out for a twilight stroll.";
+          } else {
+            message = "Late hours, eh? Perfect time for story building in the cover of night!";
+          }
+    
+          document.getElementById("greeting").textContent = message;
+        }
+    
+        // Call the function when the page loads
+        // Follow up on changes to the greeting messages
+        window.onload = getQuirkyGreeting;
+      </script>
         <p>Made with 🧙‍♂️ magic and 📚 learning</p>
         <p>&copy; 2025 Kingdom of Ignoram. All rights reserved.</p>
         <p>Created by StudiousCorgi (Asia Brown-Haller)</p>
