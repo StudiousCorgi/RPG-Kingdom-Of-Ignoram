@@ -46,6 +46,34 @@
         </div>
     </nav>
     <div class="container py-5">
+      <h1 class="text-center mb-4">🧠 Puzzle Challenge</h1>
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Puzzle 1: Decode this!</h5>
+          <p><strong>Question:</strong> What’s the Quillscript code for "WAND"? (Enter the symbols only)</p>
+          <input type="text" id="answer1" class="form-control" placeholder="Enter symbols...">
+          <button class="btn btn-primary mt-2" onclick="checkAnswer('answer1', '⚘✧❈⚑', 5, 10)">Submit</button>
+        </div>
+      </div>
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Puzzle 2: Riddle</h5>
+          <p><strong>Question:</strong> I make numbers vanish with a single slash. What am I?</p>
+          <input type="text" id="answer2" class="form-control" placeholder="Type your answer...">
+          <button class="btn btn-primary mt-2" onclick="checkAnswer('answer2', 'division', 5, 5)">Submit</button>
+        </div>
+      </div>
+  
+      <div class="alert alert-success d-none" id="rewardAlert"></div>
+  
+      <div class="progress mt-4">
+        <div id="kpProgress" class="progress-bar bg-info" style="width: 0%">KP: 0/20</div>
+      </div>
+      <p class="mt-2">Gold: <span id="goldDisplay">0</span>g</p>
+    </div>
+    <div class="container py-5">
         <h1 class="text-center mb-4">🧙‍♀️ Quillscript Codex Decoder</h1>
     
         <div class="card">
@@ -119,10 +147,45 @@
             <p>Created by StudiousCorgi (Asia Brown-Haller)</p>
         </div>
     </footer>
-
-</body>
-
-<script src="../js/quillscript.js"></script>
-<script src="../js/bootstrap.bundle.js"></script>
-
-</html>
+    
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script>
+      let character = JSON.parse(localStorage.getItem("characterData")) || { kp: 0, kpToLevel: 20, gold: 0 };
+      const solved = new Set();
+  
+      function checkAnswer(inputId, correctAnswer, kpReward, goldReward) {
+        const input = document.getElementById(inputId);
+        const value = input.value.trim().toLowerCase();
+  
+        if (value === correctAnswer.toLowerCase()) {
+          if (solved.has(inputId)) {
+            alert("You already solved this one!");
+            return;
+          }
+  
+          solved.add(inputId);
+          character.kp += kpReward;
+          character.gold += goldReward;
+          updateDisplay();
+  
+          document.getElementById("rewardAlert").textContent = `+${kpReward} KP and +${goldReward}g earned!`;
+          document.getElementById("rewardAlert").classList.remove("d-none");
+  
+          localStorage.setItem("characterData", JSON.stringify(character));
+        } else {
+          alert("That's not quite right. Try again!");
+        }
+      }
+  
+      function updateDisplay() {
+        const percent = (character.kp / character.kpToLevel) * 100;
+        document.getElementById("kpProgress").style.width = percent + "%";
+        document.getElementById("kpProgress").textContent = `KP: ${character.kp}/${character.kpToLevel}`;
+        document.getElementById("goldDisplay").textContent = character.gold;
+      }
+  
+      window.onload = updateDisplay;
+    </script>
+  </body>
+  </html>
+  

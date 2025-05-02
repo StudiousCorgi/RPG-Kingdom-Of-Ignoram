@@ -2,52 +2,46 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond&display=swap">
-    <title>Kingdom of Ignoram - Character Sheet</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond&display=swap">
+  <title>Kingdom of Ignoram - Character Sheet</title>
 </head>
 
-<body class="bg-light text-dark" img src="./digital assets/VintagePaper.png" alt="Background Image">
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">Kingdom of Ignoram</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./core.html">System Core</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./character.html">Character Sheet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./diceroller.html">Dice Roller</a>
-                <li class="nav-item">
-                    <a class="nav-link" href="./prompts.html">Adventures</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./bestiary.html">Bestiary</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./spells.html">Spells</a>
-                </li>
-            </ul>
-            </div>
-        </div>
-    </nav>
+<body class="bg-light text-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../index.html">Kingdom of Ignoram</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./core.html">System Core</a></li>
+          <li class="nav-item"><a class="nav-link active" href="./character.html">Character Sheet</a></li>
+          <li class="nav-item"><a class="nav-link" href="./diceroller.html">Dice Roller</a></li>
+          <li class="nav-item"><a class="nav-link" href="./prompts.html">Adventures</a></li>
+          <li class="nav-item"><a class="nav-link" href="./bestiary.html">Bestiary</a></li>
+          <li class="nav-item"><a class="nav-link" href="./spells.html">Spells</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div class="container py-5">
     <h1 class="text-center mb-4">Character Sheet</h1>
+
+    <!-- KP Bar -->
+    <div class="progress mb-4" style="height: 28px;">
+      <div id="kpBar" class="progress-bar bg-info" role="progressbar" style="width: 0%;">
+        KP: <span id="kpValue">0</span>/<span id="kpMax">20</span>
+      </div>
+    </div>
+
     <form id="characterForm">
       <div class="row mb-3">
         <div class="col-md-6">
@@ -56,13 +50,7 @@
         </div>
         <div class="col-md-6">
           <label for="role" class="form-label">Role (Class)</label>
-          <select id="role" class="form-select">
-            <option>Word Wielder</option>
-            <option>Math Mage</option>
-            <option>Tinker Thinker</option>
-            <option>Artisan of Art</option>
-            <option>Memory Monk</option>
-          </select>
+          <select id="role" class="form-select"></select>
         </div>
       </div>
 
@@ -90,11 +78,6 @@
       </div>
 
       <div class="mb-3">
-        <label for="kp" class="form-label">Knowledge Points (KP)</label>
-        <input type="number" id="kp" class="form-control" min="0" value="0" />
-      </div>
-
-      <div class="mb-3">
         <label for="gear" class="form-label">Gear & Items</label>
         <textarea id="gear" class="form-control" rows="2"></textarea>
       </div>
@@ -115,62 +98,40 @@
         <button type="reset" class="button">🧼 Clear</button>
       </div>
     </form>
-  </div>
-  <div class="text-center mt-5">
-    <button class="btn btn-primary" onclick="window.location.href='./sheet.html'">Printable Sheet</button>
-</div>
 
-<div class="modal fade" id="levelUpModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-success text-white">
-      <div class="modal-header">
-        <h5 class="modal-title">🎉 Level Up!</h5>
-      </div>
-      <div class="modal-body">
-        <p>Congratulations, you've reached Level <span id="newLevel"></span>!</p>
-        <p>Your stats have increased, and new spells may be available.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Awesome!</button>
+    <!-- Level-Up Modal -->
+    <div class="modal fade" id="levelUpModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-success text-white">
+          <div class="modal-header">
+            <h5 class="modal-title">🎉 Level Up!</h5>
+          </div>
+          <div class="modal-body">
+            <p>Congratulations, you've reached Level <span id="newLevel"></span>!</p>
+            <p>Your stats have increased, and new spells may be available.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Awesome!</button>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="text-center mt-5">
+      <button class="btn btn-primary" onclick="window.location.href='./sheet.html'">Printable Sheet</button>
+    </div>
   </div>
-</div>
 
-
-
-<footer class="footer">
-  <div class="text-center py-4 bg-dark text-light">
-      <div id="greeting" style="font-size: 1.5em; margin-top: 20px;"></div>
-  <script>
-      function getQuirkyGreeting() {
-        const hour = new Date().getHours();
-        let message = "";
-  
-        if (hour >= 5 && hour < 12) {
-          message = "Top of the morning, Knowledge Seeker! Mind the bears, they love porridge for breakfast!";
-        } else if (hour >= 12 && hour < 17) {
-          message = "Good afternoon, Knowledge Seeker! Watch out for sleepy dragons taking a midday nap.";
-        } else if (hour >= 17 && hour < 21) {
-          message = "Evening greetings, Adventurer! Trolls might be out for a twilight stroll.";
-        } else {
-          message = "Late hours, eh? Perfect time for story building in the cover of night!";
-        }
-  
-        document.getElementById("greeting").textContent = message;
-      }
-  
-      // Call the function when the page loads
-      // Follow up on changes to the greeting messages
-      window.onload = getQuirkyGreeting;
-    </script>
+  <footer class="footer">
+    <div class="text-center py-4 bg-dark text-light">
       <p>Made with 🧙‍♂️ magic and 📚 learning</p>
       <p>&copy; 2025 Kingdom of Ignoram. All rights reserved.</p>
       <p>Created by StudiousCorgi (Asia Brown-Haller)</p>
-  </div>
-</footer>
+    </div>
+  </footer>
 
+  <script src="../js/bootstrap.bundle.js"></script>
+  <script src="../js/character.js"></script>
 </body>
-<script src="../js/script.js"></script>
-<script src="../js/bootstrap.bundle.js"></script>
+
 </html>
