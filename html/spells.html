@@ -8,6 +8,42 @@
   <link rel="stylesheet" href="../css/bootstrap.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond&display=swap">
   <title>Kingdom of Ignoram - Spells</title>
+  <style>
+    #askFlintContainer {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      z-index: 1050;
+      font-family: 'Garamond', serif;
+    }
+    #askFlintCard {
+      background: #f5e8c7;
+      border: 3px solid #9c7b16;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    #flintIcon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    #flintResponse {
+      font-style: italic;
+      margin-top: 0.5rem;
+      min-height: 1.5rem;
+    }
+    #flintLog {
+      background-color: #fdf4d5;
+      border: 2px dashed #b58c2a;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      max-height: 150px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 
 <body class="bg-light text-dark">
@@ -34,75 +70,16 @@
 
   <div class="container py-5">
     <h1 class="text-center mb-4">Magic Spells For Knowledge Seekers</h1>
-    <!-- Ask Flint Widget -->
-<div id="askFlintContainer" style="position: fixed; bottom: 20px; right: 20px; width: 280px; z-index: 1050; font-family: 'Garamond', serif;">
-  <div style="background: #f5e8c7; border: 3px solid #9c7b16; border-radius: 12px; padding: 1rem; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
-    <label for="flintInput"><strong>Ask Flint a Question:</strong></label>
-    <input type="text" id="flintInput" class="form-control" placeholder="e.g. How do I level up?">
-    <button id="askFlintBtn" class="btn btn-warning mt-2 w-100" onclick="askFlint()">🦉 Ask Flint</button>
-    <div id="flintResponse" style="font-style: italic; margin-top: 0.5rem;"></div>
-  </div>
+    
+<div id="askFlintContainer">
+      <div id="askFlintCard">
+        <div id="flintIcon">🦉 <strong>Ask Flint</strong></div>
+        <input type="text" id="flintInput" class="form-control" placeholder="e.g. What is the prophecy?">
+        <button id="askFlintBtn" class="btn btn-warning mt-2 w-100" onclick="askFlint()">Ask Flint</button>
+        <div id="flintResponse"></div>
+        <div id="flintLog"><strong>📓 Flint's Journal:</strong><ul id="flintJournal" class="mb-0"></ul></div>
+      </div>
 </div>
-
-<script>
-  function askFlint() {
-    const question = document.getElementById("flintInput").value.trim().toLowerCase();
-    const responseBox = document.getElementById("flintResponse");
-
-    let response = "Hmm... that one's a thinker! Try asking something else.";
-    if (question.includes("level")) {
-      response = "To level up, gain Knowledge Points from puzzles and battles!";
-    } else if (question.includes("gold")) {
-      response = "You can earn gold from solving riddles and exploring dungeons!";
-    } else if (question.includes("spell")) {
-      response = "Spells are powerful! Visit the Spellbook to learn or create them.";
-    } else if (question.includes("character")) {
-      response = "All your important stats live on the character sheet. Keep it updated!";
-    }
-    else if (question.includes("adventure")) {
-      response = "Adventures are waiting! Check the Adventure section for quests.";
-    } else if (question.includes("bestiary")) {
-      response = "The Bestiary holds secrets about creatures you might encounter!";
-    } else if (question.includes("diceroller")) {
-      response = "The Dice Roller helps you decide outcomes in your adventures!";
-    }
-    else if (question.includes("system core")) {
-      response = "The System Core is the heart of the game, guiding your journey!";
-    } else if (question.includes("spells")) {
-      response = "Spells are magical abilities that can help you in battles and puzzles!";
-    }
-    else if (question.includes("magic")) {
-      response = "Magic is the essence of Ignoram! Use it wisely to solve problems.";
-    } else if (question.includes("puzzles")) {
-      response = "Puzzles are challenges that test your wit and creativity!";
-    } else if (question.includes("knowledge")) {
-      response = "Knowledge is power! Seek it in books, adventures, and conversations.";
-    }
-    else if (question.includes("learning")) {
-      response = "Learning is the key to unlocking your potential in Ignoram!";
-    } else if (question.includes("kingdom")) {
-      response = "The Kingdom of Ignoram is a place of wonder, waiting for you to explore!";
-    } else if (question.includes("adventure prompts")) {
-      response = "Adventure prompts are quests that guide you on your journey!";
-    }
-    else if (question.includes("character sheet")) {
-      response = "Your character sheet holds all your stats and abilities! Keep it updated.";
-    } else if (question.includes("system")) {
-      response = "The system is designed to make your adventures fun and engaging!";
-    } else if (question.includes("exploration")) {
-      response = "Explore the world of Ignoram to discover its secrets and treasures!";
-    }
-    else if (question.includes("quests")) {
-      response = "Quests are missions that lead you to new adventures and discoveries!";
-    } else if (question.includes("adventure")) {
-      response = "Adventures are waiting for you! Check the adventure prompts.";
-    } else if (question.includes("dice")) {
-      response = "Roll the dice to see what happens next in your story!";
-    }
-
-    responseBox.textContent = response;
-  }
-</script>
 
 
     <section class="mb-5">

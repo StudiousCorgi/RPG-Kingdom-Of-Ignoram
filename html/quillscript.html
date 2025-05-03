@@ -8,7 +8,42 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond&display=swap">
     <title>Kingdom of Ignoram - Quillscript</title>
-
+    <style>
+      #askFlintContainer {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        z-index: 1050;
+        font-family: 'Garamond', serif;
+      }
+      #askFlintCard {
+        background: #f5e8c7;
+        border: 3px solid #9c7b16;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      #flintIcon {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+      #flintResponse {
+        font-style: italic;
+        margin-top: 0.5rem;
+        min-height: 1.5rem;
+      }
+      #flintLog {
+        background-color: #fdf4d5;
+        border: 2px dashed #b58c2a;
+        padding: 0.75rem;
+        margin-top: 1rem;
+        max-height: 150px;
+        overflow-y: auto;
+        font-size: 0.9rem;
+        border-radius: 8px;
+      }
+    </style>
 </head>
 
 <body class="bg-light text-dark" img src="./digital assets/VintagePaper.png" alt="Background Image">
@@ -47,17 +82,17 @@
     </nav>
     <div class="container py-5">
       <h1 class="text-center mb-4">🧠 Puzzle Challenge</h1>
+
+<div id="askFlintContainer">
+        <div id="askFlintCard">
+          <div id="flintIcon">🦉 <strong>Ask Flint</strong></div>
+          <input type="text" id="flintInput" class="form-control" placeholder="e.g. What is the prophecy?">
+          <button id="askFlintBtn" class="btn btn-warning mt-2 w-100" onclick="askFlint()">Ask Flint</button>
+          <div id="flintResponse"></div>
+          <div id="flintLog"><strong>📓 Flint's Journal:</strong><ul id="flintJournal" class="mb-0"></ul></div>
+        </div>
+</div>
       
-    <!-- Ask Flint Widget -->
-    <div id="askFlintContainer" style="position: fixed; bottom: 20px; right: 20px; width: 280px; z-index: 1050; font-family: 'Garamond', serif;">
-      <div style="background: #f5e8c7; border: 3px solid #9c7b16; border-radius: 12px; padding: 1rem; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
-        <label for="flintInput"><strong>Ask Flint a Question:</strong></label>
-        <input type="text" id="flintInput" class="form-control" placeholder="e.g. How do I level up?">
-        <button id="askFlintBtn" class="btn btn-warning mt-2 w-100" onclick="askFlint()">🦉 Ask Flint</button>
-        <div id="flintResponse" style="font-style: italic; margin-top: 0.5rem;"></div>
-      </div>
-    </div>
-    
     <script>
       function askFlint() {
         const question = document.getElementById("flintInput").value.trim().toLowerCase();
