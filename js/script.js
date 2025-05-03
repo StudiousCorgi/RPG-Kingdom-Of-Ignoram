@@ -119,3 +119,10 @@ function loadCharacter() {
     alert("No saved character found.");
   }
 }
+
+// Function to handle the DM's message display
+function dmSay(message) {
+  const dmBox = document.getElementById("dmBox");
+  dmBox.textContent = message;
+  dmBox.classList.remove("d-none");
+}
