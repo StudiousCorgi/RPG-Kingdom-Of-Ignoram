@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond&display=swap">
     <title>Kingdom of Ignoram - Quillscript</title>
+    <script src="../js/math.min.js"></script>
     <style>
       #askFlintContainer {
         position: fixed;
@@ -83,101 +84,236 @@
     <div class="container py-5">
       <h1 class="text-center mb-4">🧠 Puzzle Challenge</h1>
 
-<div id="askFlintContainer">
-        <div id="askFlintCard">
-          <div id="flintIcon">🦉 <strong>Ask Flint</strong></div>
-          <input type="text" id="flintInput" class="form-control" placeholder="e.g. What is the prophecy?">
-          <button id="askFlintBtn" class="btn btn-warning mt-2 w-100" onclick="askFlint()">Ask Flint</button>
-          <div id="flintResponse"></div>
-          <div id="flintLog"><strong>📓 Flint's Journal:</strong><ul id="flintJournal" class="mb-0"></ul></div>
-        </div>
-</div>
-      
-    <script>
-      function askFlint() {
-        const question = document.getElementById("flintInput").value.trim().toLowerCase();
-        const responseBox = document.getElementById("flintResponse");
-    
-        let response = "Hmm... that one's a thinker! Try asking something else.";
-        if (question.includes("level")) {
-          response = "To level up, gain Knowledge Points from puzzles and battles!";
-        } else if (question.includes("gold")) {
-          response = "You can earn gold from solving riddles and exploring dungeons!";
-        } else if (question.includes("spell")) {
-          response = "Spells are powerful! Visit the Spellbook to learn or create them.";
-        } else if (question.includes("character")) {
-          response = "All your important stats live on the character sheet. Keep it updated!";
-        }
-        else if (question.includes("adventure")) {
-          response = "Adventures are waiting! Check the Adventure section for quests.";
-        } else if (question.includes("bestiary")) {
-          response = "The Bestiary holds secrets about creatures you might encounter!";
-        } else if (question.includes("diceroller")) {
-          response = "The Dice Roller helps you decide outcomes in your adventures!";
-        }
-        else if (question.includes("system core")) {
-          response = "The System Core is the heart of the game, guiding your journey!";
-        } else if (question.includes("spells")) {
-          response = "Spells are magical abilities that can help you in battles and puzzles!";
-        }
-        else if (question.includes("magic")) {
-          response = "Magic is the essence of Ignoram! Use it wisely to solve problems.";
-        } else if (question.includes("puzzles")) {
-          response = "Puzzles are challenges that test your wit and creativity!";
-        } else if (question.includes("knowledge")) {
-          response = "Knowledge is power! Seek it in books, adventures, and conversations.";
-        }
-        else if (question.includes("learning")) {
-          response = "Learning is the key to unlocking your potential in Ignoram!";
-        } else if (question.includes("kingdom")) {
-          response = "The Kingdom of Ignoram is a place of wonder, waiting for you to explore!";
-        } else if (question.includes("adventure prompts")) {
-          response = "Adventure prompts are quests that guide you on your journey!";
-        }
-        else if (question.includes("character sheet")) {
-          response = "Your character sheet holds all your stats and abilities! Keep it updated.";
-        } else if (question.includes("system")) {
-          response = "The system is designed to make your adventures fun and engaging!";
-        } else if (question.includes("exploration")) {
-          response = "Explore the world of Ignoram to discover its secrets and treasures!";
-        }
-        else if (question.includes("quests")) {
-          response = "Quests are missions that lead you to new adventures and discoveries!";
-        } else if (question.includes("adventure")) {
-          response = "Adventures are waiting for you! Check the adventure prompts.";
-        } else if (question.includes("dice")) {
-          response = "Roll the dice to see what happens next in your story!";
-        }
-    
-        responseBox.textContent = response;
-      }
-    </script>
-  
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">Puzzle 1: Decode this!</h5>
-          <p><strong>Question:</strong> What’s the Quillscript code for "WAND"? (Enter the symbols only)</p>
-          <input type="text" id="answer1" class="form-control" placeholder="Enter symbols...">
-          <button class="btn btn-primary mt-2" onclick="checkAnswer('answer1', '⚘✧❈⚑', 5, 10)">Submit</button>
-        </div>
+  <div id="askFlintContainer">
+    <button id="flintToggle" onclick="toggleFlint()">🦉 Ask Flint</button>
+    <div id="askFlintCard" style="display: none;">
+      <div id="flintIcon">🦉 <strong>Ask Flint</strong></div>
+      <input type="text" id="flintInput" class="form-control" placeholder="e.g. What is the prophecy?" />
+      <button id="askFlintBtn" class="btn btn-warning mt-2 w-100" onclick="askFlint()">Ask Flint</button>
+      <div id="flintResponse"></div>
+      <div id="flintLog">
+        <strong>📓 Flint's Journal:</strong>
+        <ul id="flintJournal" class="mb-0"></ul>
       </div>
-  
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">Puzzle 2: Riddle</h5>
-          <p><strong>Question:</strong> I make numbers vanish with a single slash. What am I?</p>
-          <input type="text" id="answer2" class="form-control" placeholder="Type your answer...">
-          <button class="btn btn-primary mt-2" onclick="checkAnswer('answer2', 'division', 5, 5)">Submit</button>
-        </div>
-      </div>
-  
-      <div class="alert alert-success d-none" id="rewardAlert"></div>
-  
-      <div class="progress mt-4">
-        <div id="kpProgress" class="progress-bar bg-info" style="width: 0%">KP: 0/20</div>
-      </div>
-      <p class="mt-2">Gold: <span id="goldDisplay">0</span>g</p>
     </div>
+  </div>
+
+  <script>
+    let flintOpen = false;
+    function toggleFlint() {
+      flintOpen = !flintOpen;
+      document.getElementById("askFlintCard").style.display = flintOpen ? "block" : "none";
+    }
+
+    const flintAnswers = {
+      level: ["To level up, gain KP by solving puzzles and quests!", "Leveling up boosts your stats and unlocks new spells!"],
+      gold: ["Gold can be earned from solving challenges.", "Spend gold on learning spells or crafting items!"],
+      spell: ["Spells are magical tools. You can learn or craft them in the Spellbook.", "New spells unlock as you level up!"],
+      kingdom: ["The Kingdom of Ignoram was once called Lumenaria—a land of learning before King Ignoramous took power."],
+      prophecy: ["Two minds of mirrored soul... The prophecy speaks of a twin awakening!"],
+      lore: ["King Ignoramous banned knowledge. You are one of the brave few seeking to restore it."],
+      default: ["Hmm... that one’s a thinker! Try asking about spells, lore, or leveling."]
+    };
+
+    function askFlint() {
+      const input = document.getElementById("flintInput").value.toLowerCase();
+      const responseBox = document.getElementById("flintResponse");
+      const journal = document.getElementById("flintJournal");
+
+      let matched = "default";
+      for (let key of Object.keys(flintAnswers)) {
+        if (input.includes(key)) {
+          matched = key;
+          break;
+        }
+      }
+
+      const replySet = flintAnswers[matched];
+      const response = replySet[Math.floor(Math.random() * replySet.length)];
+      responseBox.textContent = response;
+
+      const logItem = document.createElement("li");
+      logItem.textContent = `Q: ${input} → A: ${response}`;
+      journal.appendChild(logItem);
+    }
+  </script>
+
+    <!-- Challenges-->
+<div class="container py-5">
+  <h1 class="text-center mb-4">📚 Kingdom Challenges by Role</h1>
+
+  <div class="text-center mb-4">
+    <span class="category-tab active" onclick="filterRole('Word Mage')">Word Mage</span>
+    <span class="category-tab active" onclick="filterRole('Mathic')">Mathic</span>
+    <span class="category-tab active" onclick="filterRole('Creative')">Creative</span>
+    <span class="category-tab active" onclick="filterRole('Memory Keeper')">Memory Keeper</span>
+  </div>
+
+  <div id="puzzleContainer"></div>
+
+  <div class="progress mt-4">
+    <div id="kpProgress" class="progress-bar bg-info" style="width: 0%">KP: 0</div>
+  </div>
+  <p class="mt-2">Gold: <span id="goldDisplay">0</span>g</p>
+</div>
+
+<script>
+  const roles = ['Word Mage', 'Mathic', 'Creative', 'Memory Keeper'];
+  let currentRole = 'Word Mage';
+  const roleTabs = document.querySelectorAll('.category-tab');
+  let character = JSON.parse(localStorage.getItem("characterData")) || { kp: 0, gold: 0 };
+  let solved = new Set();
+
+  const challengeData = {
+    'Word Mage': [
+      { q: "What’s a word that means the same as 'happy'?", a: "joyful", kp: 2, gold: 3 },
+      { q: "I rhyme with 'might', and light up the sky. What am I?", a: "light", kp: 2, gold: 3 },
+      { q: "Unscramble this word: 'DREAW'", a: "weard", kp: 3, gold: 4 },
+      { q: "Which word is a homophone of 'knight'?", a: "night", kp: 3, gold: 4 },
+      { q: "What’s the plural of 'mouse'?", a: "mice", kp: 4, gold: 5 },
+      { q: "What do we call a word that describes a noun?", a: "adjective", kp: 4, gold: 5 },
+      { q: "Fill in the blank: He ran ___ than the wind.", a: "faster", kp: 5, gold: 6 },
+      { q: "What’s the opposite of 'brave'?", a: "cowardly", kp: 5, gold: 6 },
+      { q: "What's the root word of 'unbelievable'?", a: "believe", kp: 6, gold: 7 },
+      { q: "What’s an anagram of 'listen'?", a: "silent", kp: 6, gold: 7 },
+      { q: "What part of speech is the word 'quickly'?", a: "adverb", kp: 7, gold: 8 },
+      { q: "What’s a synonym for 'angry' that starts with 'i'?", a: "irate", kp: 7, gold: 8 },
+      { q: "Which punctuation ends a question?", a: "question mark", kp: 8, gold: 9 },
+      { q: "What’s the third person plural of 'to be'?", a: "are", kp: 8, gold: 9 },
+      { q: "What word fits all: hot ___, hard ___, sun ___?", a: "dog", kp: 9, gold: 10 },
+      { q: "A group of crows is called a...?", a: "murder", kp: 9, gold: 10 },
+      { q: "What word contains all vowels in order?", a: "facetious", kp: 10, gold: 12 },
+      { q: "Spell a word that means 'fear of long words'.", a: "hippopotomonstrosesquipedaliophobia", kp: 10, gold: 12 },
+      { q: "What’s the name for a word that sounds like its meaning?", a: "onomatopoeia", kp: 10, gold: 13 },
+      { q: "What’s the only word in English that ends in 'mt'?", a: "dreamt", kp: 10, gold: 15 }
+    ],
+    'Mathic': [
+      { q: "What is 2 + 2?", a: "4", kp: 2, gold: 3 },
+      { q: "What comes next: 2, 4, 6, 8, ?", a: "10", kp: 2, gold: 3 },
+      { q: "What is 5 x 3?", a: "15", kp: 3, gold: 4 },
+      { q: "What is half of 100?", a: "50", kp: 3, gold: 4 },
+      { q: "Which number is even: 11, 7, 8, or 13?", a: "8", kp: 4, gold: 5 },
+      { q: "What’s 10% of 60?", a: "6", kp: 4, gold: 5 },
+      { q: "How many sides does a hexagon have?", a: "6", kp: 5, gold: 6 },
+      { q: "What is the sum of angles in a triangle?", a: "180", kp: 5, gold: 6 },
+      { q: "If a toy costs $4 and you have $20, how many can you buy?", a: "5", kp: 6, gold: 7 },
+      { q: "Solve: 3² + 4² = ?", a: "25", kp: 6, gold: 7 },
+      { q: "What is 144 ÷ 12?", a: "12", kp: 7, gold: 8 },
+      { q: "What’s the square root of 64?", a: "8", kp: 7, gold: 8 },
+      { q: "Solve for x: x + 7 = 19", a: "12", kp: 8, gold: 9 },
+      { q: "What’s 15% of 200?", a: "30", kp: 8, gold: 9 },
+      { q: "What’s 3/4 of 100?", a: "75", kp: 9, gold: 10 },
+      { q: "How many minutes are in 2.5 hours?", a: "150", kp: 9, gold: 10 },
+      { q: "What is 2³?", a: "8", kp: 10, gold: 12 },
+      { q: "What is 0.75 as a fraction?", a: "3/4", kp: 10, gold: 12 },
+      { q: "What’s the area of a 4x5 rectangle?", a: "20", kp: 10, gold: 13 },
+      { q: "A pie is cut into 8 slices. You eat 3. What fraction remains?", a: "5/8", kp: 10, gold: 15 }
+    ],
+    'Creative': [
+        { q: "Name something blue that can fly.", a: "bluebird", kp: 2, gold: 3 },
+        { q: "What could a dragon use as a toothbrush?", a: "tree", kp: 2, gold: 3 },
+        { q: "Draw or describe a silly hat for a king.", a: "pizza crown", kp: 3, gold: 4 },
+        { q: "What’s a funny sound a robot duck might make?", a: "quack-beep", kp: 3, gold: 4 },
+        { q: "What’s a new name for a sandwich made of candy?", a: "sweetwich", kp: 4, gold: 5 },
+        { q: "Finish this: The cat danced on the...", a: "moon", kp: 4, gold: 5 },
+        { q: "Invent a magical musical instrument.", a: "cloud harp", kp: 5, gold: 6 },
+        { q: "What would socks say if they could talk?", a: "wash me", kp: 5, gold: 6 },
+        { q: "What color is a giggle?", a: "yellow", kp: 6, gold: 7 },
+        { q: "Name a pet that lives in a teacup.", a: "mouse", kp: 6, gold: 7 },
+        { q: "What does a whisper smell like?", a: "lavender", kp: 7, gold: 8 },
+        { q: "Imagine a dessert planet. What's it called?", a: "candycore", kp: 7, gold: 8 },
+        { q: "What sound does starlight make?", a: "twinkle", kp: 8, gold: 9 },
+        { q: "Design a pet for a giant—what is it?", a: "elephant flea", kp: 8, gold: 9 },
+        { q: "What do clouds dream about?", a: "flying sheep", kp: 9, gold: 10 },
+        { q: "Make a mash-up word: rain + glitter", a: "glain", kp: 9, gold: 10 },
+        { q: "Name a superhero whose power is napping.", a: "SnoozeMaster", kp: 10, gold: 12 },
+        { q: "Describe a tree that sings opera.", a: "voicewood", kp: 10, gold: 12 },
+        { q: "Invent a new holiday based on giggling.", a: "gigglefest", kp: 10, gold: 13 },
+        { q: "What’s a riddle a shadow would tell?", a: "what follows you but disappears at night?", kp: 10, gold: 15 }
+      ],
+      'Memory Keeper': [
+        { q: "What color was the navbar earlier?", a: "dark", kp: 2, gold: 3 },
+        { q: "What’s the third word in this page’s title?", a: "Challenges", kp: 2, gold: 3 },
+        { q: "How many tabs are above this content?", a: "4", kp: 3, gold: 4 },
+        { q: "What role is selected by default?", a: "Word Mage", kp: 3, gold: 4 },
+        { q: "What’s the answer to the first Mathic question?", a: "4", kp: 4, gold: 5 },
+        { q: "What do Creative players name their silly sandwich?", a: "sweetwich", kp: 4, gold: 5 },
+        { q: "What’s the third puzzle in the Creative category?", a: "pizza crown", kp: 5, gold: 6 },
+        { q: "Which puzzle asked about whisper smell?", a: "lavender", kp: 5, gold: 6 },
+        { q: "Which question mentions socks talking?", a: "wash me", kp: 6, gold: 7 },
+        { q: "What rhymes with light in Word Mage puzzles?", a: "night", kp: 6, gold: 7 },
+        { q: "Recall: What's the word ending in 'mt'?", a: "dreamt", kp: 7, gold: 8 },
+        { q: "Which fruit is never mentioned?", a: "banana", kp: 7, gold: 8 },
+        { q: "What’s a 3-letter math answer from earlier?", a: "sum", kp: 8, gold: 9 },
+        { q: "What’s the square root of 64?", a: "8", kp: 8, gold: 9 },
+        { q: "What’s a silly robot duck sound?", a: "quack-beep", kp: 9, gold: 10 },
+        { q: "What’s the default KP bar value?", a: "0", kp: 9, gold: 10 },
+        { q: "What does a pie divide into?", a: "8", kp: 10, gold: 12 },
+        { q: "How many total roles exist?", a: "4", kp: 10, gold: 12 },
+        { q: "What’s the Memory Keeper’s second question?", a: "Challenges", kp: 10, gold: 13 },
+        { q: "What role came after 'Mathic'?", a: "Creative", kp: 10, gold: 15 }
+      ]
+    };
+
+
+    function renderPuzzles() {
+      const container = document.getElementById("puzzleContainer");
+      container.innerHTML = "";
+      challengeData[currentRole].forEach((p, i) => {
+        const id = `${currentRole}-${i}`;
+        const card = document.createElement("div");
+        card.className = "card puzzle-card";
+        card.innerHTML = `
+          <div class="card-body">
+            <h5 class="card-title">${currentRole} Puzzle ${i + 1}</h5>
+            <p>${p.q}</p>
+            <input type="text" id="input-${id}" class="form-control mb-2">
+            <button class="btn btn-primary" onclick="checkAnswer('${id}', '${p.a}', ${p.kp}, ${p.gold})">Submit</button>
+            <div id="feedback-${id}" class="mt-2"></div>
+          </div>`;
+        container.appendChild(card);
+      });
+    }
+
+    function filterRole(role) {
+      currentRole = role;
+      document.querySelectorAll('.category-tab').forEach(el => el.classList.remove('active'));
+      document.querySelector(`.category-tab:contains('${role}')`)?.classList.add('active');
+      renderPuzzles();
+    }
+
+    function checkAnswer(id, correct, kp, gold) {
+      const input = document.getElementById(`input-${id}`);
+      const feedback = document.getElementById(`feedback-${id}`);
+      const guess = input.value.trim().toLowerCase();
+      if (guess === correct.toLowerCase()) {
+        if (!solved.has(id)) {
+          solved.add(id);
+          character.kp += kp;
+          character.gold += gold;
+          feedback.innerHTML = `<span class='text-success'>✅ Correct! +${kp} KP, +${gold}g</span>`;
+          updateProgress();
+        } else {
+          feedback.innerHTML = `<span class='text-info'>Already solved!</span>`;
+        }
+      } else {
+        feedback.innerHTML = `<span class='text-danger'>❌ Try again!</span>`;
+      }
+      localStorage.setItem("characterData", JSON.stringify(character));
+    }
+
+    function updateProgress() {
+      document.getElementById("kpProgress").style.width = character.kp + "%";
+      document.getElementById("kpProgress").textContent = `KP: ${character.kp}`;
+      document.getElementById("goldDisplay").textContent = character.gold;
+    }
+
+    window.onload = () => {
+      renderPuzzles();
+      updateProgress();
+    };
+  </script>
+
     <div class="container py-5">
         <h1 class="text-center mb-4">🧙‍♀️ Quillscript Codex Decoder</h1>
     
@@ -255,42 +391,49 @@
     
     <script src="../js/bootstrap.bundle.js"></script>
     <script>
-      let character = JSON.parse(localStorage.getItem("characterData")) || { kp: 0, kpToLevel: 20, gold: 0 };
-      const solved = new Set();
-  
-      function checkAnswer(inputId, correctAnswer, kpReward, goldReward) {
-        const input = document.getElementById(inputId);
-        const value = input.value.trim().toLowerCase();
-  
-        if (value === correctAnswer.toLowerCase()) {
-          if (solved.has(inputId)) {
-            alert("You already solved this one!");
-            return;
+      const quillMap = {
+        A: "✧", B: "⧫", C: "☽", D: "⚑", E: "❂", F: "✦", G: "⌖", H: "♒", I: "◉",
+        J: "⚚", K: "⚙", L: "♖", M: "☀", N: "❈", O: "✪", P: "⚔", Q: "♁", R: "☘",
+        S: "✿", T: "⏃", U: "⚵", V: "⚶", W: "⚘", X: "⚒", Y: "☊", Z: "☍"
+      };
+    
+      const reverseQuillMap = Object.fromEntries(Object.entries(quillMap).map(([k, v]) => [v, k]));
+    
+      function encodeMessage() {
+        const plain = document.getElementById("plainText").value.toUpperCase();
+        let encoded = "";
+    
+        for (let char of plain) {
+          if (quillMap[char]) {
+            encoded += quillMap[char];
+          } else if (char === " ") {
+            encoded += " ";
+          } else {
+            encoded += char; // preserve punctuation or unsupported characters
           }
-  
-          solved.add(inputId);
-          character.kp += kpReward;
-          character.gold += goldReward;
-          updateDisplay();
-  
-          document.getElementById("rewardAlert").textContent = `+${kpReward} KP and +${goldReward}g earned!`;
-          document.getElementById("rewardAlert").classList.remove("d-none");
-  
-          localStorage.setItem("characterData", JSON.stringify(character));
-        } else {
-          alert("That's not quite right. Try again!");
         }
+    
+        document.getElementById("encodedText").textContent = encoded;
       }
-  
-      function updateDisplay() {
-        const percent = (character.kp / character.kpToLevel) * 100;
-        document.getElementById("kpProgress").style.width = percent + "%";
-        document.getElementById("kpProgress").textContent = `KP: ${character.kp}/${character.kpToLevel}`;
-        document.getElementById("goldDisplay").textContent = character.gold;
+    
+      function decodeMessage() {
+        const coded = document.getElementById("quillText").value.trim();
+        let decoded = "";
+    
+        for (let symbol of coded) {
+          if (reverseQuillMap[symbol]) {
+            decoded += reverseQuillMap[symbol];
+          } else if (symbol === " ") {
+            decoded += " ";
+          } else {
+            decoded += symbol; // preserve punctuation or unsupported symbols
+          }
+        }
+    
+        document.getElementById("decodedText").textContent = decoded;
       }
-  
-      window.onload = updateDisplay;
     </script>
+    
   </body>
   </html>
   

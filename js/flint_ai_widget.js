@@ -1,4 +1,10 @@
-// Flint the Owl - Interactive Guide AI (Flexible Version)
+// Flint the Owl - Enhanced Guide with Math Support
+
+let flintOpen = false;
+function toggleFlint() {
+  flintOpen = !flintOpen;
+  document.getElementById("askFlintCard").style.display = flintOpen ? "block" : "none";
+}
 
 const flintResponseMemory = [];
 
@@ -76,6 +82,11 @@ const flintKnowledgeBase = {
     "The Prophecy of the Quill speaks of two souls who awaken the Wand and Sword.",
     "When scrolls unroll in silence, and spring returns, they shall lead the way."
   ],
+  math: [
+    "Logic and numbers, my favorite feathers!",
+    "Let me compute that with my mechanical beak...",
+    "Mathematics: the true magic of the universe!"
+  ],
   default: [
     "That's an interesting question! Try asking me about spells, puzzles, or the kingdom!",
     "I’m still learning too! Ask again with a keyword like 'magic', 'lore', or 'quests'."
@@ -87,8 +98,23 @@ function askFlint() {
   const responseBox = document.getElementById("flintResponse");
   const journal = document.getElementById("flintJournal");
 
-  let category = "default";
+  // First, check for a math expression
+  if (typeof math !== "undefined" && input.match(/[0-9x+\-*/^=()]/) && !input.includes("?")) {
+    try {
+      const result = math.evaluate(input);
+      const mathReply = flintKnowledgeBase["math"][Math.floor(Math.random() * flintKnowledgeBase["math"].length)];
+      const fullResponse = `${mathReply} 🧮 The answer is: ${result}`;
+      respondAsFlint(input, fullResponse);
+      return;
+    } catch (e) {
+      const errorResponse = "Hmm... that doesn't look like a valid math problem.";
+      respondAsFlint(input, errorResponse);
+      return;
+    }
+  }
 
+  // Fuzzy keyword category matching
+  let category = "default";
   for (const key in fuzzyKeywords) {
     if (fuzzyKeywords[key].some(kw => input.includes(kw))) {
       category = key;
@@ -98,12 +124,18 @@ function askFlint() {
 
   const messages = flintKnowledgeBase[category];
   const reply = messages[Math.floor(Math.random() * messages.length)];
+  respondAsFlint(input, reply);
+}
+
+function respondAsFlint(input, reply) {
+  const responseBox = document.getElementById("flintResponse");
+  const journal = document.getElementById("flintJournal");
 
   responseBox.innerHTML = `<span class='emoji'>🗨️</span> <em>Thinking...</em>`;
   setTimeout(() => {
     responseBox.innerHTML = `<span class='emoji'>💡</span> ${reply}`;
     const entry = document.createElement("li");
-    entry.textContent = reply;
+    entry.textContent = `Q: ${input} → A: ${reply}`;
     journal.prepend(entry);
     flintResponseMemory.push({ input, reply });
   }, 1000);
