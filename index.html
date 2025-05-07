@@ -46,6 +46,68 @@
         border-radius: 8px;
       }
     </style>
+    <style>
+        body {
+          background: #222;
+          color: #eee;
+          font-family: serif;
+          text-align: center;
+          padding: 3rem;
+        }
+        button {
+          background: #444;
+          border: 1px solid #666;
+          color: #eee;
+          padding: 0.75rem 1.5rem;
+          margin: 1rem;
+          font-size: 1rem;
+          cursor: pointer;
+          border-radius: 0.25rem;
+        }
+        button:hover { background: #555; }
+      </style>
+    </head>
+    <body>
+      <h1>King Ignoramus Speaks</h1>
+      <button id="btnWelcome">Royal Welcome</button>
+      <button id="btnEdict">Edict of Ignorance</button>
+      <button id="btnThreat">Threat to the Learned</button>
+    
+      <script>
+        // Grab the speechSynthesis API
+        const synth = window.speechSynthesis;
+    
+        // Helper to speak a line
+        function speakLine(text) {
+          // Create utterance
+          const utter = new SpeechSynthesisUtterance(text);
+    
+          // Pick a British voice if available
+          const voices = synth.getVoices();
+          const chosen = voices.find(v => v.lang.startsWith("David")) || voices[0];
+          if (chosen) utter.voice = chosen;
+    
+          // Pompous pacing and pitch
+          utter.rate = 0.20;    // ~85% of normal speed
+          utter.pitch = 0;    // slightly higher for theatrical flair
+          utter.volume = 1.8;    // full volume
+    
+          synth.speak(utter);
+        }
+    
+        // Wire up buttons
+        document.getElementById('btnWelcome')
+          .addEventListener('click', () =>
+            speakLine("Welcome… my obedient subjects. Let none dare lift a single page in my kingdom!"));
+    
+        document.getElementById('btnEdict')
+          .addEventListener('click', () =>
+            speakLine("Ignorance is safety — and safety shall reign supreme in Ignoram!"));
+    
+        document.getElementById('btnThreat')
+          .addEventListener('click', () =>
+            speakLine("Seize the miscreant who dares to read… and send them to the Mines of Muteness!"));
+      </script>
 </head>
 
 <body class="bg-light text-dark" img src="./index.html" alt="Background Image">
